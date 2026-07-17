@@ -1,11 +1,11 @@
 import { randomUUID } from "node:crypto";
 import type { FileMetadata, CreateFileInput } from "./fileTypes.js";
-import { FileRepository } from "./fileRepository.js";
+import { InMemoryFileRepository } from "./inMemoryFileRepository.js";
 
 export class FileService {
-  private repository: FileRepository;
+  private repository: InMemoryFileRepository;
 
-  constructor(repository: FileRepository) {
+  constructor(repository: InMemoryFileRepository) {
     this.repository = repository;
   }
 
@@ -23,5 +23,9 @@ export class FileService {
     fileRepo.save(fileMetadata);
 
     return fileMetadata;
+  }
+
+  listFiles(): FileMetadata[] {
+    return this.repository.findAll();
   }
 }

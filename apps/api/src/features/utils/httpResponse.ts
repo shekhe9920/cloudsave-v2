@@ -1,6 +1,9 @@
 import type { FileMetadata } from "../files/fileTypes.js";
 
-export function successResponse(statusCode: number, data: FileMetadata) {
+export function successResponse(
+  statusCode: number,
+  data: FileMetadata | FileMetadata[],
+) {
   return {
     statusCode: statusCode,
     headers: {

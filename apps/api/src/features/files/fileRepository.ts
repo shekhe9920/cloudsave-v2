@@ -1,14 +1,7 @@
 import type { FileMetadata } from "./fileTypes.js";
 
-export class FileRepository {
-  private files: FileMetadata[] = []; // fake database for now
+export interface FileRepository {
+  save(file: FileMetadata): FileMetadata;
 
-  save(file: FileMetadata): FileMetadata {
-    this.files.push(file);
-    return file;
-  }
-
-  findAll(): FileMetadata[] {
-    return [...this.files];
-  }
+  findAll(): FileMetadata[];
 }
