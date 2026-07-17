@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  HealthFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ../
+      Handler: apps/api/src/features/health/healthHandler.handler
+      Runtime: nodejs22.x
+      Events:
+        HealthApi:
+          Type: Api
+          Properties:
+            Path: /health
+            Method: get
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: false
+        Target: es2022
+        Sourcemap: true
+        EntryPoints:
+          - apps/api/src/features/health/healthHandler.ts
+
+  CreateFileFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ../
+      Handler: apps/api/src/features/files/createFileHandler.createFileHandler
+      Runtime: nodejs22.x
+      Events:
+        HealthApi:
+          Type: Api
+          Properties:
+            Path: /files
+            Method: post
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: false
+        Target: es2022
+        Sourcemap: true
+        EntryPoints:
+          - apps/api/src/features/files/createFileHandler.ts
