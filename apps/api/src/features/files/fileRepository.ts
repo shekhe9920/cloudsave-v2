@@ -5,6 +5,9 @@ export interface FileRepository {
   /** Persists file metadata and returns the stored value. */
   save(file: FileMetadata): Promise<FileMetadata>;
 
+  /** Returns file metadata by ID, or undefined when no file is found. */
+  findById(id: string): Promise<FileMetadata | undefined>;
+
   /** Returns all stored file metadata. */
   findAll(): Promise<FileMetadata[]>;
 }

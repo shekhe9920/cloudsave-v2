@@ -31,6 +31,16 @@ export class FileService {
     return savedFile;
   }
 
+  /**
+   * Finds file metadata by ID.
+   *
+   * @param id - The ID of the file to find.
+   * @returns The persisted file metadata, or undefined when no file is found.
+   */
+  async findById(id: string): Promise<FileMetadata | undefined> {
+    return this.repository.findById(id);
+  }
+
   /** Returns all persisted file metadata. */
   async listFiles(): Promise<FileMetadata[]> {
     return this.repository.findAll();

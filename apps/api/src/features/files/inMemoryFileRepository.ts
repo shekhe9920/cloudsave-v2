@@ -11,6 +11,11 @@ export class InMemoryFileRepository implements FileRepository {
     return file;
   }
 
+  /** Returns file metadata by ID, or undefined when no file is found. */
+  async findById(id: string): Promise<FileMetadata | undefined> {
+    return this.files.find((file) => file.id === id);
+  }
+
   /** Returns a copy of all file metadata currently held in memory. */
   async findAll(): Promise<FileMetadata[]> {
     // Return a new array so callers cannot mutate the repository's internal state.
