@@ -1,6 +1,6 @@
 import type { APIGatewayProxyResult } from "aws-lambda";
-import { errorResponse, successResponse } from "../utils/httpResponse.js";
-import { fileService } from "../../shared/dependencies.js";
+import { errorResponse, successResponse } from "../../utils/httpResponse.js";
+import { fileService } from "../../../shared/dependencies.js";
 
 /**
  * Retrieves all stored file metadata.

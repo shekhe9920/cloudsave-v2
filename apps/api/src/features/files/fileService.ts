@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
 import type { FileMetadata, CreateFileInput } from "./fileTypes.js";
-import type { FileRepository } from "./fileRepository.js";
+import type { FileRepository } from "./repositories/fileRepository.js";
 
 /** Provides application-level operations for file metadata. */
 export class FileService {

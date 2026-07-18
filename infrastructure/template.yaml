@@ -27,7 +27,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ../
-      Handler: apps/api/src/features/files/createFileHandler.createFileHandler
+      Handler: apps/api/src/features/files/handlers/createFileHandler.createFileHandler
       Runtime: nodejs22.x
       Events:
         CreateFilesApi:
@@ -42,13 +42,13 @@ Resources:
         Target: es2022
         Sourcemap: true
         EntryPoints:
-          - apps/api/src/features/files/createFileHandler.ts
+          - apps/api/src/features/files/handlers/createFileHandler.ts
 
   GetFilesFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ../
-      Handler: apps/api/src/features/files/getFilesHandler.getFilesHandler
+      Handler: apps/api/src/features/files/handlers/getFilesHandler.getFilesHandler
       Runtime: nodejs22.x
       Events:
         GetFilesApi:
@@ -63,13 +63,13 @@ Resources:
         Target: es2022
         Sourcemap: true
         EntryPoints:
-          - apps/api/src/features/files/getFilesHandler.ts
+          - apps/api/src/features/files/handlers/getFilesHandler.ts
 
   GetFileFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ../
-      Handler: apps/api/src/features/files/getFileHandler.getFileHandler
+      Handler: apps/api/src/features/files/handlers/getFileHandler.getFileHandler
       Runtime: nodejs22.x
       Events:
         GetFilesApi:
@@ -84,4 +84,4 @@ Resources:
         Target: es2022
         Sourcemap: true
         EntryPoints:
-          - apps/api/src/features/files/getFileHandler.ts
+          - apps/api/src/features/files/handlers/getFileHandler.ts

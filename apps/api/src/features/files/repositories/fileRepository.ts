@@ -1,4 +1,4 @@
-import type { FileMetadata } from "./fileTypes.js";
+import type { FileMetadata } from "../fileTypes.js";
 
 /** Defines the persistence operations required by the file service. */
 export interface FileRepository {

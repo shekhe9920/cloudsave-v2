@@ -1,7 +1,7 @@
 import type { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import type { CreateFileInput } from "./fileTypes.js";
-import { successResponse, errorResponse } from "../utils/httpResponse.js";
-import { fileService } from "../../shared/dependencies.js";
+import type { CreateFileInput } from "../fileTypes.js";
+import { successResponse, errorResponse } from "../../utils/httpResponse.js";
+import { fileService } from "../../../shared/dependencies.js";
 
 /**
  * Handles a request to create and persist file metadata.

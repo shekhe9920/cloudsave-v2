@@ -1,4 +1,4 @@
-import type { FileMetadata } from "./fileTypes.js";
+import type { FileMetadata } from "../fileTypes.js";
 import type { FileRepository } from "./fileRepository.js";
 
 /** In-memory file repository intended for local development and tests. */

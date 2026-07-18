@@ -1,4 +1,4 @@
-import { DynamoDbFileRepository } from "../features/files/dynamoDbFileRepository.js";
+import { DynamoDbFileRepository } from "../features/files/repositories/dynamoDbFileRepository.js";
 import { FileService } from "../features/files/fileService.js";
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
