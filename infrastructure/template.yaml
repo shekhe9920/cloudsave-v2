@@ -64,3 +64,24 @@ Resources:
         Sourcemap: true
         EntryPoints:
           - apps/api/src/features/files/getFilesHandler.ts
+
+  GetFileFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ../
+      Handler: apps/api/src/features/files/getFileHandler.getFileHandler
+      Runtime: nodejs22.x
+      Events:
+        GetFilesApi:
+          Type: Api
+          Properties:
+            Path: /files/{id}
+            Method: get
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: false
+        Target: es2022
+        Sourcemap: true
+        EntryPoints:
+          - apps/api/src/features/files/getFileHandler.ts
