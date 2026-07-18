@@ -3,6 +3,12 @@ import type { CreateFileInput } from "./fileTypes.js";
 import { successResponse, errorResponse } from "../utils/httpResponse.js";
 import { fileService } from "../../shared/dependencies.js";
 
+/**
+ * Handles a request to create and persist file metadata.
+ *
+ * @param event - The API Gateway event containing the file metadata as JSON.
+ * @returns An API Gateway response with the created file or an error message.
+ */
 export async function createFileHandler(
   event: APIGatewayProxyEvent,
 ): Promise<APIGatewayProxyResult> {
@@ -11,7 +17,10 @@ export async function createFileHandler(
   }
 
   try {
+    // Parse the body before validation because API Gateway provides it as a string.
     const parsedBody = JSON.parse(event.body);
+
+    // Check that every required property exists before reading its value.
     if (
       typeof parsedBody !== "object" ||
       parsedBody === null ||
@@ -29,6 +38,7 @@ export async function createFileHandler(
     const contentType = parsedBody.contentType;
     const size = parsedBody.size;
 
+    // Validate runtime values because request payloads cannot be trusted.
     if (
       typeof fileName !== "string" ||
       fileName === "" ||

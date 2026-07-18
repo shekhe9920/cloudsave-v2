@@ -6,6 +6,7 @@ import {
   ScanCommand,
 } from "@aws-sdk/lib-dynamodb";
 
+/** Stores and retrieves file metadata in a DynamoDB table. */
 export class DynamoDbFileRepository implements FileRepository {
   private client: DynamoDBDocumentClient;
   private tableName: string;
@@ -15,6 +16,7 @@ export class DynamoDbFileRepository implements FileRepository {
     this.tableName = tableName;
   }
 
+  /** Persists file metadata as a DynamoDB item. */
   async save(file: FileMetadata): Promise<FileMetadata> {
     try {
       const saveCmd = new PutCommand({
@@ -31,11 +33,14 @@ export class DynamoDbFileRepository implements FileRepository {
     }
   }
 
+  /** Retrieves all file metadata from the configured DynamoDB table. */
   async findAll(): Promise<FileMetadata[]> {
     try {
       const listAllCmd = new ScanCommand({ TableName: this.tableName });
 
       const response = await this.client.send(listAllCmd);
+
+      // DynamoDB omits Items when a scan has no results.
       if (!response.Items) {
         return [];
       }

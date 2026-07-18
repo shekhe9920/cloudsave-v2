@@ -3,6 +3,7 @@ import { FileService } from "../features/files/fileService.js";
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 
+// Configure the low-level client for the local DynamoDB instance.
 const dynamoDbClient = new DynamoDBClient({
   region: "eu-west-1",
   endpoint: "http://host.docker.internal:8000",
@@ -12,6 +13,7 @@ const dynamoDbClient = new DynamoDBClient({
   },
 });
 
+// Compose shared dependencies once so handlers use the same service setup.
 const documentClient = DynamoDBDocumentClient.from(dynamoDbClient);
 const fileRepository = new DynamoDbFileRepository(
   documentClient,
