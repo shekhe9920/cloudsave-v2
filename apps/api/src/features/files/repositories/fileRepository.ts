@@ -10,4 +10,7 @@ export interface FileRepository {
 
   /** Returns all stored file metadata. */
   findAll(): Promise<FileMetadata[]>;
+
+  /** Deletes file metadata by ID and returns it if it existed. */
+  deleteFileById(id: string): Promise<FileMetadata | undefined>;
 }

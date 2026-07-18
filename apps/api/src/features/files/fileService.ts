@@ -45,4 +45,14 @@ export class FileService {
   async listFiles(): Promise<FileMetadata[]> {
     return this.repository.findAll();
   }
+
+  /**
+   * Deletes file metadata by ID.
+   *
+   * @param id - The ID of the file to delete.
+   * @returns The deleted file metadata, or undefined when no file is found.
+   */
+  async deleteFileById(id: string): Promise<FileMetadata | undefined> {
+    return this.repository.deleteFileById(id);
+  }
 }

@@ -21,4 +21,13 @@ export class InMemoryFileRepository implements FileRepository {
     // Return a new array so callers cannot mutate the repository's internal state.
     return [...this.files];
   }
+
+  /** Deletes file metadata by ID and returns it if it existed. */
+  async deleteFileById(id: string): Promise<FileMetadata | undefined> {
+    const file = await this.findById(id);
+
+    this.files = this.files.filter((file) => file.id !== id);
+
+    return file;
+  }
 }

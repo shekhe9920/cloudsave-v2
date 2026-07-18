@@ -5,6 +5,7 @@ import {
   PutCommand,
   ScanCommand,
   GetCommand,
+  DeleteCommand,
 } from "@aws-sdk/lib-dynamodb";
 
 /** Stores and retrieves file metadata in a DynamoDB table. */
@@ -68,6 +69,27 @@ export class DynamoDbFileRepository implements FileRepository {
       return response.Items as FileMetadata[];
     } catch (error) {
       console.error("DynamoDbFileRepository findAll error: ", error);
+      throw error;
+    }
+  }
+
+  /** Deletes file metadata by ID and returns it if it existed. */
+  async deleteFileById(id: string): Promise<FileMetadata | undefined> {
+    try {
+      const deleteFileByIdCmd = new DeleteCommand({
+        TableName: this.tableName,
+        Key: {
+          id: id,
+        },
+        // Return the deleted item so callers can detect when the ID did not exist.
+        ReturnValues: "ALL_OLD",
+      });
+
+      const response = await this.client.send(deleteFileByIdCmd);
+      return response.Attributes as FileMetadata | undefined;
+    } catch (error) {
+      console.error("DynamoDbFileRepository deleteFileById error: ", error);
+
       throw error;
     }
   }

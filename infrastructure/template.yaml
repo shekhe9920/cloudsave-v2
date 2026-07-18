@@ -85,3 +85,24 @@ Resources:
         Sourcemap: true
         EntryPoints:
           - apps/api/src/features/files/handlers/getFileHandler.ts
+
+  DeleteFileByIdFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ../
+      Handler: apps/api/src/features/files/handlers/deleteFileByIdHandler.deleteFileByIdHandler
+      Runtime: nodejs22.x
+      Events:
+        DeleteFileByIdApi:
+          Type: Api
+          Properties:
+            Path: /files/{id}
+            Method: delete
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: false
+        Target: es2022
+        Sourcemap: true
+        EntryPoints:
+          - apps/api/src/features/files/handlers/deleteFileByIdHandler.ts
