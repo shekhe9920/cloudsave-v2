@@ -1,11 +1,7 @@
 import type { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import type { CreateFileInput } from "./fileTypes.js";
-import { InMemoryFileRepository } from "./inMemoryFileRepository.js";
-import { FileService } from "./fileService.js";
 import { successResponse, errorResponse } from "../utils/httpResponse.js";
-
-const fileRepository = new InMemoryFileRepository();
-const fileService = new FileService(fileRepository);
+import { fileService } from "../../shared/dependencies.js";
 
 export async function createFileHandler(
   event: APIGatewayProxyEvent,
@@ -55,7 +51,7 @@ export async function createFileHandler(
       size,
     };
 
-    const createdFile = fileService.createFile(file);
+    const createdFile = await fileService.createFile(file);
 
     return successResponse(201, createdFile);
   } catch (error) {

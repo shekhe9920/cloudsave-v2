@@ -1,15 +1,15 @@
 import { randomUUID } from "node:crypto";
 import type { FileMetadata, CreateFileInput } from "./fileTypes.js";
-import { InMemoryFileRepository } from "./inMemoryFileRepository.js";
+import type { FileRepository } from "./fileRepository.js";
 
 export class FileService {
-  private repository: InMemoryFileRepository;
+  private repository: FileRepository;
 
-  constructor(repository: InMemoryFileRepository) {
+  constructor(repository: FileRepository) {
     this.repository = repository;
   }
 
-  createFile(input: CreateFileInput): FileMetadata {
+  async createFile(input: CreateFileInput): Promise<FileMetadata> {
     const fileMetadata: FileMetadata = {
       id: randomUUID(),
       fileName: input.fileName,
@@ -19,13 +19,12 @@ export class FileService {
     };
 
     const fileRepo = this.repository;
+    const savedFile = await fileRepo.save(fileMetadata);
 
-    fileRepo.save(fileMetadata);
-
-    return fileMetadata;
+    return savedFile;
   }
 
-  listFiles(): FileMetadata[] {
+  async listFiles(): Promise<FileMetadata[]> {
     return this.repository.findAll();
   }
 }

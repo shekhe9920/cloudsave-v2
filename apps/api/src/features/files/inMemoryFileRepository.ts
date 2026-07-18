@@ -4,12 +4,12 @@ import type { FileRepository } from "./fileRepository.js";
 export class InMemoryFileRepository implements FileRepository {
   private files: FileMetadata[] = []; // fake database for now
 
-  save(file: FileMetadata): FileMetadata {
+  async save(file: FileMetadata): Promise<FileMetadata> {
     this.files.push(file);
     return file;
   }
 
-  findAll(): FileMetadata[] {
+  async findAll(): Promise<FileMetadata[]> {
     return [...this.files];
   }
 }

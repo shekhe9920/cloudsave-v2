@@ -1,7 +1,7 @@
 import type { FileMetadata } from "./fileTypes.js";
 
 export interface FileRepository {
-  save(file: FileMetadata): FileMetadata;
+  save(file: FileMetadata): Promise<FileMetadata>;
 
-  findAll(): FileMetadata[];
+  findAll(): Promise<FileMetadata[]>;
 }
