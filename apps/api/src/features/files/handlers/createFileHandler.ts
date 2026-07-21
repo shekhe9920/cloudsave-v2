@@ -13,7 +13,7 @@ export async function createFileHandler(
   event: APIGatewayProxyEvent,
 ): Promise<APIGatewayProxyResult> {
   if (!event.body) {
-    return errorResponse(400, "bad Request", "Missing body in request");
+    return errorResponse(400, "Bad Request", "Missing body in request");
   }
 
   try {
@@ -50,7 +50,7 @@ export async function createFileHandler(
     ) {
       return errorResponse(
         400,
-        "bad Request",
+        "Bad Request",
         "fileName and contentType must be non-empty strings, and size must be a non-negative number",
       );
     }
